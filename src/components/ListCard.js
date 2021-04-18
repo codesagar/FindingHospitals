@@ -1,0 +1,110 @@
+import React from 'react';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        margin: '18px auto',
+        marginTop:0
+    },
+    paper: {
+        padding: '1.5rem 2rem',
+        borderRadius:'10px'
+    },
+    infoContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        margin: '3px auto',
+    },
+    headContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-between'
+    },
+    title: {
+        fontSize: '1.2em',
+        fontWeight:'500'
+    },
+    highlight: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems:'center',
+        margin: '10px auto',
+        marginTop:0,
+        padding: '8px',
+        border: '1px solid',
+        borderColor:theme.palette.grey[700]
+    }
+}));
+
+
+const ListCard = ({details}) => {
+    const classes = useStyles();
+
+    const infoText = (key, value) => {
+        return <div className={classes.infoContainer} key={key}>
+            <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}</Typography>
+        </div>
+    }
+
+    const infoText2 = (key, value) => {
+        return <div className={classes.highlight} key={key}>
+            <Typography style={{fontSize:'0.9rem',fontWeight:600}} color="primary">{key.toUpperCase()}:&ensp;</Typography>
+            <Typography variant="body1" >{value}</Typography>
+        </div>
+    }
+
+    const values = {
+        "Contact number": details["Contact"],
+        "Address": details["Hospital Address"],
+        "Nodal officer": details["Nodal Officer Name"],
+        "Nodal officer contact no": details["Nodal Officer Mobile No"],
+        // "Cluster": details["Cluster Name"]==="Not Define"?"Not defined":details["Cluster Name"],
+        "Distance": details["Distance"]+' KM',
+        "Vacant General Beds": details["Vacant-GEN"]?details["Vacant-GEN"]: 0,
+        "Vacant Oxygen Supply beds": details["Vacant-O2"]?details["Vacant-O2"]: 0,
+        "Vacant ICU beds": details["Vacant-ICU"]?details["Vacant-ICU"]: 0
+    }
+
+    return (
+        <Container maxWidth="md" className={classes.container}>
+            <Paper elevation={4} className={classes.paper}>
+                <Grid container spacing={2}>
+                    <Grid item xs={11} md={8} component={Container}>
+                        <Typography variant="subtitle1" className={classes.title}>{details["Hospital Name"]}</Typography>
+                    </Grid>
+                    <Grid item xs={12} md={4} component={Container} >
+                        <Button variant="contained" color="primary" style={{width:'100%',fontWeight:'400'}}
+                            onClick={() => window.open(details["Map Link"], "_blank")}
+                        > Open with Maps</Button>
+                    </Grid>
+                </Grid>
+                <br />
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={8} component={Container}>
+                        {
+                            Object.keys(values).slice(0,-3).map((v) => {
+                                return infoText(v, values[v]);
+                            })
+                        }                        
+                        <br/>
+                    </Grid>
+                    <Grid item xs={12} md={4} component={Container}>
+                        {
+                            Object.keys(values).slice(-3).map((v) => {
+                                return infoText2(v, values[v]);
+                            })
+                        }
+                    </Grid>                   
+                </Grid>
+            </Paper>
+        </Container>
+    )
+}
+
+export default ListCard;

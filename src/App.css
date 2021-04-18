@@ -1,0 +1,17 @@
+body{
+    margin:0;
+    background-color:#f7f7f7;
+}
+
+.app-main{
+    min-height: 100vh;
+}
+
+.progress-container{
+    display: flex;
+    justify-content: center;
+}
+
+.autocomplete-dropdown-container{
+    box-shadow: 0.5px 0.8px 8px #888;
+}
