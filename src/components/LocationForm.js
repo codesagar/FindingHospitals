@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Script from 'react-load-script';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -41,7 +42,8 @@ class LocationForm extends Component {
             address: '',
             snackbarOpen:false,
             snackbarText: '',
-            type:'GEN'
+            type: 'GEN',
+            libLoaded:false
         }
     }
 
@@ -108,18 +110,22 @@ class LocationForm extends Component {
         
         return (
             <form className={classes.container} noValidate >
+                <Script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`} onLoad={ ()=>this.setState({libLoaded:true})}/>
                 <div className={classes.grid} style={{marginBottom:'25px'}}>
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
                     >Detect my location</Button>
                 </div>
                 <Grid container spacing={2} className={classes.grid}>
                     <Grid item xs={11} md={6} component={Container}>
-                        <PlacesAutocomplete
-                            value={address}
-                            onChange={this.handleChange}
-                            onSelect={this.handleSelect}
-                        >{ autocompleteTextFieldProps() }
-                        </PlacesAutocomplete>
+                        {
+                            this.state.libLoaded?
+                            <PlacesAutocomplete
+                                value={address}
+                                onChange={this.handleChange}
+                                onSelect={this.handleSelect}
+                            >{autocompleteTextFieldProps()}
+                            </PlacesAutocomplete>: null
+                        }
                     </Grid>
                     <Grid item xs={11} md={2} component={Container}>
                         <FormControl variant="outlined" fullWidth>

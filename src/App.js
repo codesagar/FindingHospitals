@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Header from './components/Header';
 import Title from './components/Title';
@@ -11,8 +12,6 @@ import LocationForm from './components/LocationForm';
 
 import getHospitals from './helpers/getHospitals';
 import './App.css';
-import { CircularProgress } from '@material-ui/core';
-
 
 require('dotenv').config();
 
