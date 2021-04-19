@@ -54,7 +54,7 @@ class HomePage extends Component {
                 <Typography variant="subtitle1" align="center">National Toll Free: <a href="tel:1075" style={{ textDecoration: 'none' }}>1075</a></Typography>
                 
                 <Title
-                    text="Search for nearest hospital based on your location and required facilities (ICU/Oxygen/General Bed)"
+                    text="Search for nearest hospital in Vadodara based on your location and required facilities (ICU/Oxygen/General Bed)"
                     variant="h6" />
                 <LocationForm sendReqToGetHospitals={this.sendReqToGetHospitals} /><br />
                 {
