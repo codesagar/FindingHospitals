@@ -110,8 +110,11 @@ class LocationForm extends Component {
         
         return (
             <form className={classes.container} noValidate >
-                <Script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`} onLoad={ ()=>this.setState({libLoaded:true})}/>
-                <div className={classes.grid} style={{marginBottom:'25px'}}>
+                <Script
+                    url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`}
+                    onLoad={() => this.setState({ libLoaded: true })}
+                />
+                <div className={classes.grid} style={{marginBottom:'35px'}}>
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
                     >Detect my location</Button>
                 </div>
@@ -124,7 +127,7 @@ class LocationForm extends Component {
                                 onChange={this.handleChange}
                                 onSelect={this.handleSelect}
                             >{autocompleteTextFieldProps()}
-                            </PlacesAutocomplete>: null
+                            </PlacesAutocomplete>: <></>
                         }
                     </Grid>
                     <Grid item xs={11} md={2} component={Container}>

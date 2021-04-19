@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.2em',
         fontWeight:'500'
     },
-    highlight: {
+    borderContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems:'center',
@@ -39,21 +39,36 @@ const useStyles = makeStyles((theme) => ({
         padding: '8px',
         border: '1px solid',
         borderColor:theme.palette.grey[700]
+    },
+    hightlight: {
+        backgroundColor: '#deeeff'
     }
 }));
 
 
-const ListCard = ({details}) => {
+const ListCard = ({ details, bedType }) => {
+    
+    const type = (bedType === 'GEN' ? 'Vacant General Beds' : (bedType === 'O2' ? 'Vacant Oxygen Supply beds' : 'Vacant ICU beds'));
     const classes = useStyles();
 
     const infoText = (key, value) => {
         return <div className={classes.infoContainer} key={key}>
-            <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}</Typography>
+            {
+                key === "Contact number" || key === "Nodal officer contact no" ?
+                    <Typography variant="body1">
+                        <strong>
+                            {key}:&ensp;
+                        </strong>
+                        <a href={`tel:${value}`} style={{ textDecoration: 'none'}}>{value}</a>
+                    </Typography>
+                    : <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}</Typography>
+            }
         </div>
     }
 
-    const infoText2 = (key, value) => {
-        return <div className={classes.highlight} key={key}>
+    const bedInfoText = (key, value) => {
+        return <div key={key}
+            className={type !== key ? classes.borderContainer : [classes.borderContainer, classes.hightlight].join(' ')}>
             <Typography style={{fontSize:'0.9rem',fontWeight:600}} color="primary">{key.toUpperCase()}:&ensp;</Typography>
             <Typography variant="body1" >{value}</Typography>
         </div>
@@ -97,7 +112,7 @@ const ListCard = ({details}) => {
                     <Grid item xs={12} md={4} component={Container}>
                         {
                             Object.keys(values).slice(-3).map((v) => {
-                                return infoText2(v, values[v]);
+                                return bedInfoText(v, values[v]);
                             })
                         }
                     </Grid>                   
