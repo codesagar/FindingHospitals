@@ -19,7 +19,7 @@ class HomePage extends Component {
             snackbarText: '',
             loading: false,
             bedType: '',
-            lastUpdatedOn: new Date()
+            lastUpdatedOn: ''
         }
     }
 
@@ -33,11 +33,10 @@ class HomePage extends Component {
                 loading: false
             });
         } else {
-            const date = new Date(res.lastUpdatedOn);
             this.setState({
                 isResponseLoaded: true,
                 hospitals: res.hospitals,
-                lastUpdatedOn:date,
+                lastUpdatedOn:res.lastUpdatedOn,
                 loading: false
             });
         }
@@ -45,8 +44,6 @@ class HomePage extends Component {
 
     render() {
         const { isResponseLoaded, hospitals, snackbarOpen, snackbarText, loading, bedType, lastUpdatedOn } = this.state;
-        const date = lastUpdatedOn.toDateString().slice(3, 10);
-        const time = lastUpdatedOn.toLocaleTimeString().slice(0, -6) + ' ' +lastUpdatedOn.toLocaleTimeString().slice(-3);
         return (
             <>
                 <br />
@@ -71,7 +68,7 @@ class HomePage extends Component {
                                     Nearest hospitals
                                 </Typography>
                                 <Typography align="center" variant="body2" color="primary" style={{ marginBottom: '15px', marginTop:'3px' }}>
-                                    Last updated on <strong>{date},{time}</strong>
+                                    Last updated on <strong>{lastUpdatedOn}</strong>
                                 </Typography>
                                 {hospitals.map((hos) => {
                                     return <ListCard key={hospitals.indexOf(hos)} details={hos} bedType={bedType} />
