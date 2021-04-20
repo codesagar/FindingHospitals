@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 
 import autocompleteTextFieldProps from '../helpers/autoCompleteTextFieldProps';
 import reverseGeocoding from '../helpers/reverseGeocoding';
@@ -114,10 +115,16 @@ class LocationForm extends Component {
                     url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`}
                     onLoad={() => this.setState({ libLoaded: true })}
                 />
-                <div className={classes.grid} style={{marginBottom:'35px'}}>
+                <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'5px',justifyContent:'center'}}>
+                    <Grid item xs={10} component={Container} style={{display:'flex',justifyContent:'center'}}>
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
-                    >Detect my location</Button>
-                </div>
+                        >Detect my location</Button>
+                    </Grid>
+                    <Grid item xs={11} component={Container}>
+                    <Typography variant="body2" color="secondary" align="center"
+                        >Currently for vadodara, expanding to other cities soon.</Typography>
+                    </Grid>
+                </Grid>
                 <Grid container spacing={2} className={classes.grid}>
                     <Grid item xs={11} md={6} component={Container}>
                         {
@@ -141,7 +148,7 @@ class LocationForm extends Component {
                                 label="Type"
                             >
                                 <MenuItem value='ICU'>ICU Bed</MenuItem>
-                                <MenuItem value='O2'>Oxygen Supply</MenuItem>
+                                <MenuItem value='O2'>Oxygen</MenuItem>
                                 <MenuItem value='GEN'>General Bed</MenuItem>
                             </Select>
                         </FormControl>

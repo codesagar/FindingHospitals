@@ -28,8 +28,8 @@ const Header = () => {
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
                     <Link to='/' className={[classes.title,classes.link].join(' ')}>
-                        <Typography variant="subtitle2" color="inherit" style={{fontSize:'1.1rem'}}>
-                            COVID BEDS
+                        <Typography variant="subtitle2" color="inherit" style={{fontSize:'1rem'}}>
+                            COVID BEDS VADODARA
                     </Typography>
                     </Link>
                     <Link to='/contact' className={classes.link}>

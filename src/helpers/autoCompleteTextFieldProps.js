@@ -8,7 +8,6 @@ const autocompleteTextFieldProps = () => {
                     label="Location"
                     variant="outlined"
                     fullWidth size="medium"
-                    autoFocus
                     {...getInputProps({
                         placeholder: 'Search Places ...',
                         className: 'location-search-input',
