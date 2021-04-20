@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(2),
         paddingBottom:theme.spacing(1),
         display: 'flex',
         justifyContent:'center'

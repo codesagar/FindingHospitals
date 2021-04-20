@@ -114,7 +114,7 @@ class ContactPage extends Component {
                     />
                     <TextField
                         id="contact"
-                        label="Contact ( Enter phone or email )"
+                        label="Contact ( Phone or email )"
                         name="contact"
                         variant="outlined"
                         fullWidth

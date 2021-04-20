@@ -31,6 +31,10 @@ const Styles = ((theme) => ({
         width: '100%',
         paddingTop: '13px',
         paddingBottom:'13px'
+    },
+    flexDisplay: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 }));
 
@@ -116,12 +120,12 @@ class LocationForm extends Component {
                     onLoad={() => this.setState({ libLoaded: true })}
                 />
                 <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'5px',justifyContent:'center'}}>
-                    <Grid item xs={10} component={Container} style={{display:'flex',justifyContent:'center'}}>
+                    <Grid item xs={10} component={Container} className={classes.flexDisplay} >
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
                         >Detect my location</Button>
                     </Grid>
-                    <Grid item xs={11} component={Container}>
-                    <Typography variant="body2" color="secondary" align="center"
+                    <Grid item xs={11} component={Container} className={classes.flexDisplay}>
+                    <Typography variant="caption" color="secondary" align="center"
                         >Currently for vadodara, expanding to other cities soon.</Typography>
                     </Grid>
                 </Grid>

@@ -11,7 +11,7 @@ const getHospitals = async(params) => {
     const response = await axios.post(url, data, { headers }).catch((err) => {
         return {err:'Something went wrong. Please try again'}
     });
-    return{ hospitals: response.data.result}
+    return{ hospitals: response.data.result, lastUpdatedOn: response.data['last_updated']}
 }
 
 export default getHospitals;

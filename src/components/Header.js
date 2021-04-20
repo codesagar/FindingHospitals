@@ -26,12 +26,14 @@ const Header = () => {
     return (
         <div >
             <AppBar position="static">
-                <Toolbar className={classes.toolbar}>
-                    <Link to='/' className={[classes.title,classes.link].join(' ')}>
-                        <Typography variant="subtitle2" color="inherit" style={{fontSize:'1rem'}}>
+                <Toolbar className={classes.toolbar} variant="dense">
+                    
+                    <Typography variant="subtitle2" color="inherit" className={[classes.title, classes.link].join(' ')}>
+                        <Link to='/' style={{ color:'#fff',textDecoration:'none' }} >
                             COVID BEDS VADODARA
+                        </Link>
                     </Typography>
-                    </Link>
+                    
                     <Link to='/contact' className={classes.link}>
                         <Button color="inherit" variant="outlined" size="small">Contact us</Button>
                     </Link>

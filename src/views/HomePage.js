@@ -5,13 +5,9 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 
-import Title from '../components/Title';
 import ListCard from '../components/ListCard';
 import LocationForm from '../components/LocationForm';
-
 import getHospitals from '../helpers/getHospitals';
-
-
 
 class HomePage extends Component {
     constructor(props) {
@@ -22,7 +18,8 @@ class HomePage extends Component {
             snackbarOpen: false,
             snackbarText: '',
             loading: false,
-            bedType:''
+            bedType: '',
+            lastUpdatedOn: new Date()
         }
     }
 
@@ -36,26 +33,32 @@ class HomePage extends Component {
                 loading: false
             });
         } else {
+            const date = new Date(res.lastUpdatedOn);
             this.setState({
                 isResponseLoaded: true,
                 hospitals: res.hospitals,
+                lastUpdatedOn:date,
                 loading: false
-            })
+            });
         }
     }
 
     render() {
-        const { isResponseLoaded, hospitals, snackbarOpen, snackbarText, loading, bedType } = this.state;
+        const { isResponseLoaded, hospitals, snackbarOpen, snackbarText, loading, bedType, lastUpdatedOn } = this.state;
+        const date = lastUpdatedOn.toDateString().slice(3, 10);
+        const time = lastUpdatedOn.toLocaleTimeString().slice(0, -6) + ' ' +lastUpdatedOn.toLocaleTimeString().slice(-3);
         return (
             <>
                 <br />
-                <Typography variant="subtitle1" align="center">Gujarat Helpline: <a href="tel:104" style={{textDecoration:'none'}}>104</a></Typography>
-                <Typography variant="subtitle1" align="center">National Helpline: <a href="tel:+91-11-23978046" style={{ textDecoration: 'none' }}>+91-11-23978046</a></Typography>
-                <Typography variant="subtitle1" align="center">National Toll Free: <a href="tel:1075" style={{ textDecoration: 'none' }}>1075</a></Typography>
-                
-                <Title
-                    text="Search for nearest hospital in Vadodara based on your location and required facilities (ICU/Oxygen/General Bed)"
-                    variant="h6" />
+                <Typography variant="body2" align="center">
+                    National Toll Free:
+                    <a href="tel:1075" style={{ textDecoration: 'none' }}>1075</a>
+                </Typography>
+                <Typography align="center" style={{marginTop:'15px', fontSize:'1.1rem',paddingLeft:'8px',paddingRight:'8px'}}>
+                    <strong >
+                        Search for nearest hospital in Vadodara based on your location and required facilities (ICU/Oxygen/General Bed)
+                    </strong>
+                </Typography>
                 <LocationForm sendReqToGetHospitals={this.sendReqToGetHospitals} /><br />
                 {
                     loading ?
@@ -64,9 +67,14 @@ class HomePage extends Component {
                         </div> :
                         isResponseLoaded ?
                             <>
-                                <Title text="Nearest hospitals" variant="h5" />
+                                <Typography align="center" style={{ marginTop: '5px', fontSize: '1.3rem' }}>
+                                    Nearest hospitals
+                                </Typography>
+                                <Typography align="center" variant="body2" color="primary" style={{ marginBottom: '15px', marginTop:'3px' }}>
+                                    Last updated on <strong>{date},{time}</strong>
+                                </Typography>
                                 {hospitals.map((hos) => {
-                                    return <ListCard key={hospitals.indexOf(hos)} details={hos} bedType={bedType}/>
+                                    return <ListCard key={hospitals.indexOf(hos)} details={hos} bedType={bedType} />
                                 })}<br /><br />
                             </>
                             : null
