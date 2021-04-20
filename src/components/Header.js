@@ -30,7 +30,7 @@ const Header = () => {
                     
                     <Typography variant="subtitle2" color="inherit" className={[classes.title, classes.link].join(' ')}>
                         <Link to='/' style={{ color:'#fff',textDecoration:'none' }} >
-                            COVID BEDS VADODARA
+                            COVID HOSPITALS IN VADODARA
                         </Link>
                     </Typography>
                     
