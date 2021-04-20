@@ -48,7 +48,7 @@ const DevInfoCard = () => {
         {
             name: 'Sagar Patel',
             linkedIn: 'https://www.linkedin.com/in/codesagar',
-            linkedInContactText: 'Codesagar',
+            linkedInContactText: 'LinkedIn Profile',
             email: 'sagarpatel.exe@gmail.com',
             emailContactText:'sagarpatel.exe@gmail.com'
         },
@@ -56,7 +56,7 @@ const DevInfoCard = () => {
             name: 'Shreya Paradkar',
             linkedIn: '',
             linkedInContactText:'',
-            email: 'srparadkar@gmail.com',
+            email: 'srparadkar15@gmail.com',
             emailContactText:'srparadkar15@gmail.com',
         }
     ]
@@ -67,7 +67,7 @@ const DevInfoCard = () => {
             {
                 params.linkedIn ?
                     <Typography align="center">
-                        <a href={params.linkedIncontact} className={classes.contact} target="_blank" rel="noreferrer" >
+                        <a href={params.linkedIn} className={classes.contact} target="_blank" rel="noreferrer" >
                             <LinkedInIcon color="primary" />&nbsp;{params.linkedInContactText}
                         </a>
                     </Typography>
