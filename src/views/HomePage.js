@@ -68,7 +68,7 @@ class HomePage extends Component {
                                     Nearest hospitals
                                 </Typography>
                                 <Typography align="center" variant="body2" color="primary" style={{ marginBottom: '15px', marginTop:'3px' }}>
-                                    Last updated on <strong>{lastUpdatedOn}</strong>
+                                    [ Last updated on <strong>{lastUpdatedOn}</strong> ]
                                 </Typography>
                                 {hospitals.map((hos) => {
                                     return <ListCard key={hospitals.indexOf(hos)} details={hos} bedType={bedType} />
@@ -80,7 +80,6 @@ class HomePage extends Component {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                     open={snackbarOpen}
                     onClose={() => this.setState({ snackbarOpen: false })}
-                    message="Follow up completed!"
                     autoHideDuration={2500}>
                     <MuiAlert elevation={6} variant="filled" severity="error">{snackbarText}</MuiAlert>
                 </Snackbar>

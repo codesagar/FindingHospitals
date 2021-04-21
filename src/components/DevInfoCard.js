@@ -62,7 +62,7 @@ const DevInfoCard = () => {
     ]
 
     const infoDisplay = (params) => {
-        return <Paper className={classes.paper}>
+        return <Paper className={classes.paper} key={params.name}>
             <Typography className={classes.name} align="center">{params.name}</Typography>
             {
                 params.linkedIn ?

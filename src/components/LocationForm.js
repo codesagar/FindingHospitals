@@ -171,7 +171,6 @@ class LocationForm extends Component {
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                         open={snackbarOpen}
                         onClose={()=>this.setState({snackbarOpen:false})}
-                        message="Follow up completed!"
                         autoHideDuration={2500}>
                         <MuiAlert elevation={6} variant="filled" severity="error">{snackbarText}</MuiAlert>
                     </Snackbar>
