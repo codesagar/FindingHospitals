@@ -30,7 +30,8 @@ const Styles = (theme) => ({
     btn: {
         margin: '6px',
         display: 'flex',
-        flexDirection:'column'
+        flexDirection: 'column',
+        alignItems:'center'
     },
     title: {
         margin:'9px auto'

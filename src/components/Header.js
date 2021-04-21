@@ -9,8 +9,9 @@ import Button from '@material-ui/core/Button';
 import ShareCard from './ShareCard';
 
 const Styles = ((theme) => ({
+    offset: theme.mixins.toolbar,
     toolbar: {
-        alignItems:'space-evenly'
+        justifyContent:'flex-end'
     },
     linkText: {
         textDecoration: 'none',
@@ -37,6 +38,12 @@ class Header extends Component{
         }
     }
 
+    componentDidMount() {
+        if (window.innerWidth <= 330) {
+            document.getElementById('headerTitle').remove()
+        }
+    }
+
     onShareBtnClick = () => {
         this.setState({drawerOpen:!this.state.drawerOpen})
     }
@@ -45,10 +52,10 @@ class Header extends Component{
         const { classes } = this.props;
         const { drawerOpen } = this.state;
         return (
-            <div >
-                <AppBar position="static">
-                    <Toolbar className={[classes.toolbar].join(' ')} variant="dense">
-                        <Typography variant="subtitle2" color="inherit"
+            <React.Fragment>
+                <AppBar position="sticky">
+                    <Toolbar className={classes.toolbar} variant="dense">
+                        <Typography variant="subtitle2" color="inherit" id="headerTitle"
                             className={[classes.title, classes.linkText].join(' ')}>
                             <Link to='/' className={classes.link} >
                                 COVID HOSPITALS
@@ -62,7 +69,7 @@ class Header extends Component{
                     </Toolbar>
                 </AppBar>
                 <ShareCard open={drawerOpen} onClose={this.onShareBtnClick}/>
-            </div>
+            </React.Fragment>
         );
     }
     

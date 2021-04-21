@@ -39,6 +39,7 @@ class HomePage extends Component {
                 lastUpdatedOn:res.lastUpdatedOn,
                 loading: false
             });
+            window.scrollTo({ top: 185, behavior: 'smooth' });
         }
     }
 
