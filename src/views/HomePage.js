@@ -4,6 +4,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
+import Container from '@material-ui/core/Container';
 
 import ListCard from '../components/ListCard';
 import LocationForm from '../components/LocationForm';
@@ -48,15 +50,18 @@ class HomePage extends Component {
         return (
             <>
                 <br />
-                <Typography variant="body2" align="center">
-                    National Helpline:
-                    <a href="tel:1075" style={{ textDecoration: 'none' }}>1075</a>
-                </Typography>
-                <Typography align="center" style={{marginTop:'15px', fontSize:'1.1rem',paddingLeft:'8px',paddingRight:'8px'}}>
-                    <strong >
-                        Search for nearest hospital in Vadodara based on your location and required facilities (ICU/Oxygen/General Bed)
-                    </strong>
-                </Typography>
+                <Container>
+                    <Typography variant="body2" align="center">
+                        National Helpline:
+                        <a href="tel:1075" style={{ textDecoration: 'none' }}>1075</a>
+                    </Typography>
+                    <Typography align="center" style={{marginTop:'15px', fontSize:'1rem'}}>
+                        <strong >
+                            Search for nearest hospital in Vadodara based on your location and
+                            required facilities (ICU/Oxygen/General Bed)
+                        </strong>
+                    </Typography>
+                </Container>
                 <LocationForm sendReqToGetHospitals={this.sendReqToGetHospitals} /><br />
                 {
                     loading ?
@@ -68,9 +73,12 @@ class HomePage extends Component {
                                 <Typography align="center" style={{ marginTop: '5px', fontSize: '1.3rem' }}>
                                     Nearest hospitals
                                 </Typography>
-                                <Typography align="center" variant="body2" color="primary" style={{ marginBottom: '15px', marginTop:'3px' }}>
-                                    [ Last updated on <strong>{lastUpdatedOn}</strong> ]
-                                </Typography>
+                                <Container maxWidth="md" style={{ margin: '8px auto' }}>
+                                    <Alert severity="info" >
+                                        Last updated on <strong>{lastUpdatedOn}. </strong>
+                                        Data might be delayed or partial. Please verify with the hospital
+                                    </Alert>
+                                </Container>
                                 {hospitals.map((hos) => {
                                     return <ListCard key={hospitals.indexOf(hos)} details={hos} bedType={bedType} />
                                 })}<br /><br />

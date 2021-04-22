@@ -89,7 +89,7 @@ const ListCard = ({ details, bedType }) => {
     return (
         <Container maxWidth="md" className={classes.container}>
             <Paper elevation={4} className={classes.paper}>
-                <Grid container spacing={2}>
+                <Grid container spacing={1}>
                     <Grid item xs={11} md={8} component={Container}>
                         <Typography variant="subtitle1" className={classes.title}>{details["Hospital Name"]}</Typography>
                     </Grid>

@@ -119,7 +119,7 @@ class LocationForm extends Component {
                     url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`}
                     onLoad={() => this.setState({ libLoaded: true })}
                 />
-                <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'8px',justifyContent:'center'}}>
+                <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'12px',justifyContent:'center'}}>
                     <Grid item xs={10} component={Container} className={classes.flexDisplay} >
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
                         >Detect my location</Button>
