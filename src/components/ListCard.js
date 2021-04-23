@@ -99,7 +99,8 @@ const ListCard = ({ details, bedType }) => {
                     <Grid item xs={12} md={8} component={Container}>
                         {
                             Object.keys(details).slice(0, -3).map((key) => {
-                                if (["Cluster Name", "Hospital Name", "Lat", "Lon", "Lookup", "Map Link", "Place ID"].includes(key)) {
+                                if (["Cluster Name", "Hospital Name", "Lat", "Lon", "Lookup", "Map Link", "Place ID"].includes(key)
+                                    || !details[key] || details[key].length < 1) {
                                     return null;
                                 }
                                 return infoText(key, details[key]);
