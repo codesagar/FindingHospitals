@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         marginTop:'0.8rem'
+    },
+    link: {
+        textDecoration:'none'
     }
 }));
 
@@ -27,7 +30,7 @@ const TermsPage = () =>{
     const classes = useStyles();
     return (
         <Container className={classes.container} maxWidth="md">
-            <Link to="/">
+            <Link to="/" className={classes.link}>
                 <Button size="small">
                     <ArrowBackIcon fontSize="small" />&nbsp; Go back to home page
             </Button>
