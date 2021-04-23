@@ -54,14 +54,15 @@ const ListCard = ({ details, bedType }) => {
     const infoText = (key, value) => {
         return <div className={classes.infoContainer} key={key}>
             {
-                key === "Contact number" || key === "Nodal officer contact no" ?
+                key === "Contact" || key === "Nodal Officer Mobile No" ?
                     <Typography variant="body1">
                         <strong>
                             {key}:&ensp;
                         </strong>
                         <a href={`tel:${value}`} style={{ textDecoration: 'none'}}>{value}</a>
                     </Typography>
-                    : <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}</Typography>
+                    : <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}
+                        { key==="Distance"?' KM':null}</Typography>
             }
         </div>
     }
@@ -74,13 +75,7 @@ const ListCard = ({ details, bedType }) => {
         </div>
     }
 
-    const values = {
-        "Contact number": details["Contact"],
-        "Address": details["Hospital Address"],
-        "Nodal officer": details["Nodal Officer Name"],
-        "Nodal officer contact no": details["Nodal Officer Mobile No"],
-        // "Cluster": details["Cluster Name"]==="Not Define"?"Not defined":details["Cluster Name"],
-        "Distance": details["Distance"]+' KM',
+    const bedDetails = {
         "Vacant General Beds": details["Vacant-GEN"]?details["Vacant-GEN"]: 0,
         "Vacant Oxygen Supply beds": details["Vacant-O2"]?details["Vacant-O2"]: 0,
         "Vacant ICU beds": details["Vacant-ICU"]?details["Vacant-ICU"]: 0
@@ -103,16 +98,19 @@ const ListCard = ({ details, bedType }) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={8} component={Container}>
                         {
-                            Object.keys(values).slice(0,-3).map((v) => {
-                                return infoText(v, values[v]);
+                            Object.keys(details).slice(0, -3).map((key) => {
+                                if (["Cluster Name", "Hospital Name", "Lat", "Lon", "Lookup", "Map Link", "Place ID"].includes(key)) {
+                                    return null;
+                                }
+                                return infoText(key, details[key]);
                             })
                         }                        
                         <br/>
                     </Grid>
                     <Grid item xs={12} md={4} component={Container}>
                         {
-                            Object.keys(values).slice(-3).map((v) => {
-                                return bedInfoText(v, values[v]);
+                            Object.keys(bedDetails).map((key) => {
+                                return bedInfoText(key, bedDetails[key]);
                             })
                         }
                     </Grid>                   
