@@ -57,7 +57,7 @@ class HomePage extends Component {
                     </Typography>
                     <Typography align="center" style={{marginTop:'15px', fontSize:'1rem'}}>
                         <strong >
-                            Search for nearest hospital in Vadodara based on your location and
+                            Search for nearest hospital in Vadodara/Telangana based on your location and
                             required facilities (ICU/Oxygen/General Bed)
                         </strong>
                     </Typography>

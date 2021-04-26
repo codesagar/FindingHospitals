@@ -128,7 +128,7 @@ class LocationForm extends Component {
                     </Grid>
                     <Grid item xs={11} component={Container} className={classes.flexDisplay}>
                     <Typography variant="caption" color="secondary" align="center"
-                        >Currently for vadodara, expanding to other cities soon.</Typography>
+                        >Currently for Hyderabad/Telangana and Vadodara, expanding to other cities soon.</Typography>
                     </Grid>
                 </Grid>
                 <Grid container spacing={2} className={classes.grid}>

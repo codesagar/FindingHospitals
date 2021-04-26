@@ -4,5 +4,6 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/14178f88-b6ab-4403-8d74-2d50f16d0ecf/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/FindingHospitalsReact2",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "python.pythonPath": "C:\\Users\\Sagar Patel\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
 }
