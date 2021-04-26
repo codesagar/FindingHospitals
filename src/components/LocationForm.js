@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import Script from 'react-load-script';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -13,8 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
-import autocompleteTextFieldProps from '../helpers/autoCompleteTextFieldProps';
 import reverseGeocoding from '../helpers/reverseGeocoding';
 
 const Styles = ((theme) => ({
@@ -52,6 +50,35 @@ class LocationForm extends Component {
         }
     }
 
+    componentDidMount() {
+        window.addEventListener('load', this.handleWindowLoad);
+    }
+
+    handleWindowLoad = () => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`;
+        script.setAttribute('id', 'placesScript');
+        document.getElementsByTagName('head')[0].appendChild(script);
+        script.addEventListener('load', () => {
+            this.setState({ libLoaded: true });
+            const google = window.google;
+            const autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocompleteField')), { types: ['geocode'] });
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                this.setState({
+                    address: place.formatted_address,
+                    latitude: place.geometry.location.toJSON().lat,
+                    longitude: place.geometry.location.toJSON().lng
+                });
+            })
+        });        
+    }
+
+    componentWillUnmount() {
+        if(document.getElementById('placesScript'))
+            document.getElementById('placesScript').remove();
+    }
+
     getCurrentLocation = () => {
         navigator.geolocation.getCurrentPosition(async (res) => {
             this.setState({ address: 'Getting user location...' });
@@ -71,42 +98,21 @@ class LocationForm extends Component {
             }
             });
     }
-    
-
-    handleChange = address => {
-        this.setState({ address });
-    };
-
-    handleSelect = async(address) => {
-        this.setState({ address });
-        const results = await geocodeByAddress(address).catch();
-        const latLng = await getLatLng(results[0]).catch((err) => {
-            this.setState({
-                snackbarOpen: true,
-                snackbarText: err
-            });
-        });
-        this.setState({
-            latitude: latLng.lat,
-            longitude: latLng.lng
-        });
-    };
 
     onBtnClick=()=> {
         if (this.state.address.length > 1) {
-            this.handleSelect(this.state.address);
             if (this.state.latitude && this.state.longitude)
                 this.props.sendReqToGetHospitals({
                     lat: this.state.latitude,
                     lon: this.state.longitude,
-                    type:this.state.type
+                    type: this.state.type
                 });
         }
         else
             this.setState({
                 snackbarOpen: true,
-                snackbarText:'Enter valid address'
-            })
+                snackbarText: 'Enter valid location'
+            });
     }
 
     render() {
@@ -115,10 +121,6 @@ class LocationForm extends Component {
         
         return (
             <form className={classes.container} noValidate >
-                <Script
-                    url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`}
-                    onLoad={() => this.setState({ libLoaded: true })}
-                />
                 <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'12px',justifyContent:'center'}}>
                     <Grid item xs={10} component={Container} className={classes.flexDisplay} >
                     <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
@@ -131,15 +133,15 @@ class LocationForm extends Component {
                 </Grid>
                 <Grid container spacing={2} className={classes.grid}>
                     <Grid item xs={11} md={6} component={Container}>
-                        {
-                            this.state.libLoaded?
-                            <PlacesAutocomplete
-                                value={address}
-                                onChange={this.handleChange}
-                                onSelect={this.handleSelect}
-                            >{autocompleteTextFieldProps()}
-                            </PlacesAutocomplete>: <></>
-                        }
+                        <TextField
+                            id="autocompleteField"
+                            variant="outlined"
+                            fullWidth
+                            label="Location"
+                            placeholder="Search for location..."
+                            value={address}
+                            onChange={(e)=>this.setState({address:e.target.value})}
+                        />
                     </Grid>
                     <Grid item xs={11} md={2} component={Container}>
                         <FormControl variant="outlined" fullWidth>

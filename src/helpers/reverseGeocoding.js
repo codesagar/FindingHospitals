@@ -4,19 +4,18 @@ const reverseGeocoding = async (latitude, longitude) => {
     const loc= `${latitude},${longitude}`;
     const url =
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${encodeURIComponent(loc)}&key=${process.env.REACT_APP_MAPS_API_KEY}`;
-    let err = false;
     const response = await axios.get(url).catch((e) => {
-        console.error(e);
-        err = true;
+        return { err: 'Error geting location' };
     });
-    const results = await response.data;
-    if (results.status !== 'OK')
-        err = true;
-    if (err)
-        return { err: 'Error geting location' }
-    
-    const address = await results.results[0].formatted_address
-    return { address:address };
+    if (response && response.status===200) {
+        const results = await response.data;
+        if (results.status !== 'OK')
+            return { err: 'Error geting location' };
+        const address = await results.results[0].formatted_address
+        return { address: address };
+    } else {
+        return { err: 'Error geting location' };
+    }     
 }
 
 export default reverseGeocoding;

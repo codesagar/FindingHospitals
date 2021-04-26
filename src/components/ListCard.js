@@ -54,7 +54,7 @@ const ListCard = ({ details, bedType }) => {
     const infoText = (key, value) => {
         return <div className={classes.infoContainer} key={key}>
             {
-                key === "Contact" || key === "Nodal Officer Mobile No" ?
+                key.toLowerCase() === "contact" || key === "Nodal Officer Mobile No" || key.toLowerCase() === "google contact"?
                     <Typography variant="body1">
                         <strong>
                             {key}:&ensp;
@@ -100,7 +100,7 @@ const ListCard = ({ details, bedType }) => {
                         {
                             Object.keys(details).slice(0, -3).map((key) => {
                                 if (["Cluster Name", "Hospital Name", "Lat", "Lon", "Lookup", "Map Link", "Place ID"].includes(key)
-                                    || !details[key] || details[key].length < 1) {
+                                    || !details[key] || details[key].length <= 1) {
                                     return null;
                                 }
                                 return infoText(key, details[key]);
