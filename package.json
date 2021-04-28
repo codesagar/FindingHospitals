@@ -1,5 +1,5 @@
 {
-  "name": "finding-hospitals",
+  "name": "covid-beds",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

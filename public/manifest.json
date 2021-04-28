@@ -1,9 +1,9 @@
 {
-  "short_name": "Finding hospitals",
-  "name": "Finding hospitals",
+  "short_name": "Covid beds",
+  "name": "Covid beds online",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3F51B5",
   "background_color": "#ffffff"
 }
