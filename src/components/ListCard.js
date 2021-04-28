@@ -74,6 +74,7 @@ class ListCard extends Component{
     handleReportClick = () => this.setState({ openReportDialog: true });
     handleReportDialogClose = () => this.setState({ openReportDialog: false });
     handleAccordionOpen = (event, expanded) => this.setState({ subtextVisible: !expanded });
+    convertToArray = (value) => String(value).split(",");
 
     render() {
         const { details, bedType, classes } = this.props;
@@ -88,8 +89,10 @@ class ListCard extends Component{
                         <Typography variant="body1">
                             <strong>
                                 {key}:&ensp;
-                        </strong>
-                            <a href={`tel:${value}`} style={{ textDecoration: 'none' }}>{value}</a>
+                            </strong>
+                            {
+                                this.convertToArray(value).map((num) => <a key={num} href={`tel:${num}`} style={{ textDecoration: 'none' }}>{num}</a>)
+                            }
                         </Typography>
                         : <Typography variant="body1"><strong>{key}:&ensp;</strong>{value}
                             {key === "Distance" ? ' KM' : null}</Typography>
