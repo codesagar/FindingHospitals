@@ -12,6 +12,9 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import reverseGeocoding from '../helpers/reverseGeocoding';
 
@@ -115,6 +118,8 @@ class LocationForm extends Component {
             });
     }
 
+    clearInputValue = () => this.setState({ address: '', latitude: null, longitude: null });
+
     render() {
         const { classes } = this.props;
         const { address, snackbarOpen, snackbarText, type } = this.state;
@@ -140,7 +145,14 @@ class LocationForm extends Component {
                             label="Location"
                             placeholder="Search for location..."
                             value={address}
-                            onChange={(e)=>this.setState({address:e.target.value})}
+                            onChange={(e) => this.setState({ address: e.target.value })}
+                            InputProps={address.length>1?{endAdornment:
+                                <InputAdornment position="end">
+                                    <IconButton size="small" onClick={this.clearInputValue}>
+                                        <ClearIcon fontSize="small"/>
+                                    </IconButton>
+                                </InputAdornment>
+                            }:null}
                         />
                     </Grid>
                     <Grid item xs={11} md={2} component={Container}>
