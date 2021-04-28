@@ -55,6 +55,9 @@ const Styles = ((theme) => ({
     reportBtn: {
         alignSelf: 'flex-start',
         color:theme.palette.error.main
+    },
+    bold: {
+        fontWeight:600
     }
 }));
 
@@ -98,7 +101,7 @@ class ListCard extends Component{
             return <div key={key}
                 className={type !== key ? classes.borderContainer : [classes.borderContainer, classes.hightlight].join(' ')}>
                 <Typography style={{ fontSize: '0.9rem', fontWeight: 600 }} color="primary">{key.toUpperCase()}:&ensp;</Typography>
-                <Typography variant="body1" >{value}</Typography>
+                <Typography style={{ fontSize: '0.9rem' }}>{value}</Typography>
             </div>
         }
 
@@ -117,9 +120,14 @@ class ListCard extends Component{
                             <Typography variant="subtitle1" className={classes.title}>{details["Hospital Name"]}</Typography>
                         </Grid>
                             {
-                                subtextVisible ? <Grid item xs={11} component={Container} className={classes.subtitle}>
-                                    <Typography variant="caption">{type}:{details[`Vacant-${bedType}`]}</Typography>
-                                </Grid>
+                                subtextVisible ? <>
+                                    <Grid item xs={11} component={Container} className={classes.subtitle}>
+                                        <Typography variant="caption">{type}: <span style={{ fontWeight: 500 }}>{details[`Vacant-${bedType}`]}</span></Typography>
+                                    </Grid>
+                                    <Grid item xs={11} component={Container} className={classes.subtitle}>
+                                        <Typography variant="caption">Distance: <span style={{fontWeight:500}}>{details["Distance"]} KM</span></Typography>
+                                    </Grid>
+                                    </>
                                     :null
                             }    
                     </Grid>
