@@ -24,11 +24,11 @@ const Styles = ((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'row',
+        alignItems:'center'
     },
     btn: {
-        width: '100%',
-        paddingTop: '13px',
-        paddingBottom:'13px'
+        paddingTop: '10px',
+        paddingBottom:'10px'
     },
     flexDisplay: {
         display: 'flex',
@@ -123,7 +123,7 @@ class LocationForm extends Component {
             <form className={classes.container} noValidate >
                 <Grid container spacing={1} className={classes.grid} style={{marginBottom:'20px',marginTop:'12px',justifyContent:'center'}}>
                     <Grid item xs={10} component={Container} className={classes.flexDisplay} >
-                    <Button variant="outlined" color="primary" onClick={this.getCurrentLocation}
+                        <Button variant="outlined" color="primary" onClick={this.getCurrentLocation} size="small"
                         >Detect my location</Button>
                     </Grid>
                     <Grid item xs={11} component={Container} className={classes.flexDisplay}>
@@ -159,10 +159,10 @@ class LocationForm extends Component {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={10} md={2} component={Container}>
+                    <Grid item xs={11} md={1} component={Container}>
                         <Button
                             variant="contained"
-                            size="large"
+                            size="small"
                             color="primary"
                             className={classes.btn}
                             fullWidth

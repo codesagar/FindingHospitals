@@ -43,7 +43,8 @@ class ContactPage extends Component {
             snackbarOpen: false,
             snackbarText: '',
             snackbarSeverity:'',
-            err:false
+            err: false,
+            disabled:false
         }
         
     }
@@ -67,6 +68,7 @@ class ContactPage extends Component {
     onClickSubmit = async() => {
         if (this.state.name.length > 1 && this.state.contact.length > 1 && this.state.message.length > 1) {
             if (this.validateContact()) {
+                this.setState({ disabled: true });
                 const res = await sendMessage({
                     name: this.state.name,
                     contact: this.state.contact,
@@ -76,13 +78,18 @@ class ContactPage extends Component {
                     this.setState({
                         snackbarOpen: true,
                         snackbarSeverity: "error",
-                        snackbarText: res.err
+                        snackbarText: res.err,
+                        disabled: false
                     });
                 else 
                     this.setState({
                         snackbarOpen: true,
                         snackbarSeverity: "success",
-                        snackbarText: res.success
+                        snackbarText: res.success,
+                        disabled: false,
+                        name: '',
+                        contact: '',
+                        message: ''
                     });
                 
             }
@@ -97,7 +104,7 @@ class ContactPage extends Component {
 
     render() {
         const { classes } = this.props
-        const { err, snackbarOpen, snackbarText, snackbarSeverity } = this.state;
+        const { err, snackbarOpen, snackbarText, snackbarSeverity,disabled,name,contact,message } = this.state;
         return (
             <form noValidate>
                 <Paper elevation={4} className={classes.paper}>
@@ -111,6 +118,7 @@ class ContactPage extends Component {
                         required
                         className={classes.textField}
                         onChange={this.handleChange}
+                        value={name}
                     />
                     <TextField
                         id="contact"
@@ -122,7 +130,8 @@ class ContactPage extends Component {
                         className={classes.textField}
                         onChange={this.handleChange}
                         error={err}
-                        helperText={err?'Invalid contact information':null}
+                        helperText={err ? 'Invalid contact information' : null}
+                        value={contact}
                     />
                     <TextareaAutosize
                         required
@@ -132,6 +141,7 @@ class ContactPage extends Component {
                         className={classes.textField}
                         style={{ width: '98%' }}
                         onChange={this.handleChange}
+                        value={message}
                     ></TextareaAutosize>
                     <Button
                         variant="contained"
@@ -140,6 +150,7 @@ class ContactPage extends Component {
                         size="large"
                         style={{ width: '100%', marginTop: '18px' }}
                         onClick={this.onClickSubmit}
+                        disabled={disabled}
                     >Submit</Button>
                 </Paper>
                 <Snackbar
